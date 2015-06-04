@@ -120,6 +120,38 @@ def find_with_filters(walking, carnivores, period, big, small)
   result5 = small ? find_big(false) : all_dinos
   all_dinos & result2 & result3 & result4 & result5 & result1
 end
+
+def find_name_in_dinodex(name)
+  CSV.foreach(DINODEX_PATH) do |row|
+    if row[0].upcase == name.upcase
+      puts "Name: " + row[0]
+      puts "Period: " + row[1]
+      puts "Continent: " + row[2]
+      puts "Diet: " + row[3]
+      puts "Weight in lbs: " + row[4] unless row[4].nil?
+      puts "Walking: " + row[5]
+      puts "Description: " + row[6] unless row[6].nil?
+    end
+  end
+end
+
+def find_name_in_export(name)
+  CSV.foreach(EXPORT_PATH) do |row|
+    if row[0].upcase == name.upcase
+      puts "Genus: " + row[0]
+      puts "Period: " + row[1]
+      puts "Carnivore? " + row[2]
+      puts "Weight: " + row [3] unless row[3].nil?
+      puts "Walking: " + row[4]
+    end
+  end
+end
+
+def find_by_name(name)
+  find_name_in_dinodex(name)
+  find_name_in_export(name)
+end
+
 # puts "These are the dinosaurs that were bipeds"
 # puts find_walking("biped")
 # puts "These are the dinosaurs that were carnivores"
@@ -130,3 +162,5 @@ end
 # puts find_big(true)
 
 puts find_with_filters("biped", true, "Cretaceous", 1, false)
+
+find_by_name("diplocaulus")
