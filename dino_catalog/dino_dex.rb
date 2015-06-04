@@ -109,24 +109,22 @@ def find_big(big)
   find_big_small_in_dinodex(big) + find_big_small_in_export(big)
 end
 
-def find_with_filters(walking=false, carnivores=false, period=false, big=false, small=false)
+def find_with_filters(walking, carnivores, period, big, small)
   all_dinos = all_dinosaurs
   result1 = walking ? find_walking(walking) : all_dinos
   result2 = carnivores ? find_carnivores : all_dinos
   result3 = period ? find_period(period) : all_dinos
   result4 = big ? find_big(true) : all_dinos
   result5 = small ? find_big(false) : all_dinos
-  result = all_dinos & result2 & result3 & result4 & result5 & result1
-  puts result
+  all_dinos & result2 & result3 & result4 & result5 & result1
 end
-#puts "These are the dinosaurs that were bipeds"
-#puts find_walking("biped")
-#puts "These are the dinosaurs that were carnivores"
-#puts find_carnivores
-#puts "These are the dinosaurs that were in Cretaceous period"
-#puts find_period("Cretaceous")
-#puts "These are the big dinosaurs"
-#puts find_big(true)
+# puts "These are the dinosaurs that were bipeds"
+# puts find_walking("biped")
+# puts "These are the dinosaurs that were carnivores"
+# puts find_carnivores
+# puts "These are the dinosaurs that were in Cretaceous period"
+# puts find_period("Cretaceous")
+# puts "These are the big dinosaurs"
+# puts find_big(true)
 
-puts "These are the big dinosaurs from the Cretaceous period who were biped and carnivores."
 puts find_with_filters("biped", true, "Cretaceous", 1, false)
