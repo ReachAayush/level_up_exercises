@@ -105,6 +105,8 @@ def find_big_small_in_export(big)
   results
 end
 
+# if big is true then it finds dinos >= 4000 lbs
+# if big is false then it finds dinos < 4000 lbs
 def find_big(big)
   find_big_small_in_dinodex(big) + find_big_small_in_export(big)
 end
