@@ -1,6 +1,9 @@
+
+require_relative 'dino.rb'
 require 'csv'
 
 class DinoParser
+  attr_accessor :rows
   HEADERS = {
     "NAME" => :name,
     "PERIOD" => :period,
@@ -30,7 +33,8 @@ class DinoParser
 
   def get_dinos
     rows.map do |row|
-      #create dino using row
+      # create dino using row
+      Dino.new(format_dino(row))
     end
   end
 
