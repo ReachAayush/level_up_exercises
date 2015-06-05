@@ -152,6 +152,10 @@ def find_by_name(name)
   find_name_in_export(name)
 end
 
+def print_neatly(input)
+  p input
+end
+
 # puts "These are the dinosaurs that were bipeds"
 # puts find_walking("biped")
 # puts "These are the dinosaurs that were carnivores"
@@ -161,6 +165,7 @@ end
 # puts "These are the big dinosaurs"
 # puts find_big(true)
 
-puts find_with_filters("biped", true, "Cretaceous", 1, false)
+print_neatly(find_with_filters("biped", true, "Cretaceous", 1, false))
 
-find_by_name("diplocaulus")
+# find_by_name("diplocaulus")
+
