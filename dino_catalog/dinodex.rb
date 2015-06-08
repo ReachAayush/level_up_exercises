@@ -5,8 +5,7 @@ class DinoDex
   attr_accessor :dinos
 
   def initialize(args = {})
-    @dinos = []
-    @dinos.replace(args[:dinos]) if args[:dinos]
+    @dinos = args[:dinos] || []
   end
 
   def parse_csv(csv)
