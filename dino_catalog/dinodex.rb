@@ -18,16 +18,29 @@ class DinoDex
     DinoDex.new(dinos: @dinos)
   end
 
-  def get_bipeds(args = {})
+  def bipeds(args = {})
     all_dinos = args[:dinos] ? args[:dinos] : clone.dinos
     all_dinos.delete_if { |dino| dino.walking.upcase != "BIPED" }
   end
 
-  def get_carnivores(args = {})
+  def carnivores(args = {})
     all_dinos = args[:dinos] ? args[:dinos] : clone.dinos
     all_dinos.delete_if { |dino| dino.diet.upcase == "HERBIVORE" }
     all_dinos.delete_if { |dino| dino.diet.upcase == "NOT CARNIVORE" }
   end
+
+  def in_period(period, args={})
+    all_dinos = args[:dinos] ? args[:dinos] : clone.dinos
+    all_dinos.keep_if { |dino| dino.period.upcase.include? period.upcase}
+  end
+
+  def big(args = {})
+    all_dinos = args[:dinos] ? args[:dinos] : clone.dinos
+    all_dinos.delete_if { |dino| dino.weight > 4000 }
+  end
+
+  def 
+
 end
 
 dinodex = DinoDex.new
