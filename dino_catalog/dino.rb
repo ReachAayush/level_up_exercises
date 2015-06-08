@@ -1,3 +1,5 @@
+require 'attr_init'
+
 class Dino
   PROPERTIES = [:name,
                 :period,
@@ -8,14 +10,8 @@ class Dino
                 :description,
                 :carnivore]
 
-  attr_accessor(*PROPERTIES)
-
-  def initialize(args = {})
-    PROPERTIES.each do |var|
-      instance_variable_set("@#{var}", args[var] || "")
-    end
-  end
-
+  accessor_struct(*PROPERTIES)
+  
   def to_s
     str = ""
     instance_variables.each { |var| str += print_var(var) }
