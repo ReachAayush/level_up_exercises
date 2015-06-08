@@ -43,6 +43,7 @@ class DinoParser
     row.each_index do |i|
       new_dino[@header_indicies[i]] = row[i]
     end
+    new_dino[:weight] = new_dino[:weight].to_i
     fix_carnivore(new_dino)
     new_dino
   end
