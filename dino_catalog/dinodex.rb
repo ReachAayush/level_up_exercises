@@ -38,9 +38,6 @@ class DinoDex
     all_dinos = args[:dinos] ? args[:dinos] : clone.dinos
     all_dinos.delete_if { |dino| dino.weight > 4000 }
   end
-
-  def 
-
 end
 
 dinodex = DinoDex.new
