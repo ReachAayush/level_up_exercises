@@ -10,31 +10,32 @@ class ConversionRateCalculator
   end
 
   def cohort(id)
-    all_data = @data.clone
-    all_data.delete_if { |d| d["cohort"] == id }
+    data[id]
+  end
+
+  def cohort_size(id)
+    data[id].size
   end
 
   def num_conversions(id)
-    cohort(id).delete_if { |d| d["result"] == 0 }.length
+    data[id].conversions
+  end
+
+  def num_fails(id)
+    data[id].fails
   end
 
   def conversion_rate_interval(id)
-    ABAnalyzer.confidence_interval(num_conversions(id), cohort(id).length, 0.95)
+    ABAnalyzer.confidence_interval(num_conversions(id), cohort_size(id), 0.95)
   end
 
   def chi_squared
     values = {}
-    values[:a] = { :pass => num_conversions("A"), :fail => cohort("A").size }
-    values[:b] = { :pass => num_conversions("B"), :fail => cohort("B").size }
+    values[:a] = { :pass => num_conversions("A"), :fail => num_fails("A") }
+    values[:b] = { :pass => num_conversions("B"), :fail => num_fails("B") }
     tester = ABAnalyzer::ABTest.new values
-    if tester.chisquare_p < .05
-      puts "Group A is a clear winner over group B with a confidence level of 95%"
-    else
-      puts "Group A is not a clear winner over group B"
+    s1 = "Group A is a clear winner over Group B with a confidence level of 95%"
+    s2 = "Group A is not a clear winner over Group B"
+    tester.chisquare_p < 0.05 ? s1 : s2
   end
 end
-
-file_name = "data_export_2014_06_20_15_59_02.json"
-importer = CohortDataImporter.new(file_name)
-calc = ConversionRateCalculator.new(importer.data)
-binding.pry
