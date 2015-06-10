@@ -12,7 +12,6 @@ class CohortDataImporter
     @cohort_data = {}
     @cohort_data["A"] = create_cohort("A")
     @cohort_data["B"] = create_cohort("B")
-    puts @cohort_data
   end
 
   def cohort(id)
