@@ -56,6 +56,6 @@ end
 dinodex = DinoDex.new
 dinodex.parse_csv("dinodex.csv")
 dinodex.parse_csv("african_dinosaur_export.csv")
-puts dinodex.to_s
-binding.pry
+puts dinodex.in_period("late")
+#binding.pry
 dinodex.dinos
